@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> <!-- 제이쿼리 CDN-->
+    <style>
+        * {
+            margin: 0;
+        }
+
+        .section {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+            grid-gap: 20px;
+        }
+
+        #header {
+            width: 100%;
+            background: black;
+            height: 60px;
+        }
+        #header span {
+            margin-left: 1%;
+            color: white;
+            font-weight: 700;
+        }
+        #contents {
+            width: 1100px;
+            height: 809px;
+            margin: 0 auto;
+        }
+        
+        .section {
+            width:1100px;
+            height: 809px;
+            display: flex;
+            margin-top:1%;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .article {
+            
+            width:15%;
+            background-color: palegoldenrod;
+            height: 100%;
+        }
+        .article2 {
+            display: flex;
+            width: 75%;
+            background-color: rebeccapurple;
+            height: 100%;
+        }
+
+        footer {
+            width: 100%;
+            text-align: center;
+            background: black;
+            color: white;
+            font-weight: 700;
+            height: 100px;
+            margin-top:4%;
+        }
+        #paging  { /*페이지 영역 */
+            margin-top: 1%;
+            text-align: center;
+        }
+        #paging span{ /* 페이지번호 */
+            cursor: pointer;
+            padding: 10px;
+            border: 1px solid rgb(167, 159, 159);
+            border-radius: 3px;
+            margin-right : 3px;
+        }
+        .m_footer {
+            display: none;
+        }
+        .iframes {
+            margin: 2%;
+        }
+        @media screen and (max-width: 1100px) { /* 크기에 따라 최대 값 1000px  화면이 1000px 미만일대 사용 */
+            body {
+                overflow-x: hidden;
+            }
+            #header {
+                width: 1000px;
+            }
+            footer {
+                width: 1000px;
+            }
+            .title {
+                font-size: 5vw;
+            }
+            #contents {
+                width: 800px;
+                height: 1800px;
+                text-align: center;
+            }
+            .section {
+                display: block;
+            }
+
+            footer {
+                display: block;
+            }
+            .article {
+                display: block;
+                margin-left: 30%;
+                font-size: 2vw;
+                background: white;
+            }
+
+            .article2 {
+                display: block;
+                background-color: white;
+            }
+            
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="header">
+            <br>
+            <span>Home</span> <span>교육비디오</span> <span>소개</span>
+        </div>
+        <div id="contents">
+            <br>
+            <h1 class="title">교육 비디오</h1>
+            <hr>
+            <div class="section"> <!-- body 내용 -->
+                <div class="article">
+                    <h2>
+                        안녕하세요 <br>
+                        전세계로 향하는 구글 유튜브 입니다 <br>
+                        많은 시청 바랍니다.
+                    </h2>
+                </div>
+
+                <div class="article2">
+                    <div class="iframes">
+                        <iframe width="380" height="300" src="https://www.youtube.com/embed/3izy-5dDcYU" 
+                            title="구글 비디오로 전세계 동영상을 검색해 보세요!" 
+                            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="iframes">
+                        <iframe width="380" height="300" src="https://www.youtube.com/embed/3izy-5dDcYU" 
+                            title="구글 비디오로 전세계 동영상을 검색해 보세요!" 
+                            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>    
+                    </div>
+                </div>
+            </div>
+            <br>
+
+            <div class="m_footer">
+                <br><br>
+                Seneca College, Copyright @ 2022
+            </div>
+        </div>
+        <footer>
+            <br><br>
+            Seneca College, Copyright @ 2022
+        </footer>
+    </div>
+
+</body>
+</html>

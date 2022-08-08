@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> <!-- 제이쿼리 CDN-->
+    <style>
+        * {
+            margin: 0;
+        }
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+            grid-gap: 20px;
+        }
+
+        .card {
+            display: grid;
+            grid-template-rows: max-content 200px 1fr;
+        }
+
+        .card img {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+        #header {
+            width: 100%;
+            background: black;
+            height: 60px;
+        }
+        #header span {
+            color: white;
+            font-weight: 700;
+        }
+        #contents {
+            width: 1100px;
+            height: 809px;
+            margin: 0 auto;
+        }
+        
+        .cards {
+            
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .card {
+            margin-top: 2%;
+            border: 1px solid black;
+            width: 300px;
+            padding: 2%;
+        }
+        footer {
+            text-align: center;
+            background: black;
+            color: white;
+            font-weight: 700;
+            height: 100px;
+            margin-top:4%;
+        }
+        #paging  { /*페이지 영역 */
+            margin-top: 1%;
+            text-align: center;
+        }
+        #paging span{ /* 페이지번호 */
+            cursor: pointer;
+            padding: 10px;
+            border: 1px solid rgb(167, 159, 159);
+            border-radius: 3px;
+            margin-right : 3px;
+        }
+        .m_footer {
+            display: none;
+        }
+        @media screen and (max-width: 1100px) { /* 크기에 따라 최대 값 1000px  화면이 1000px 미만일대 사용 */
+            body {
+                overflow-x: hidden;
+            }
+            #paging {
+                margin-top: 3%;
+            }
+            #header {
+                width: 1100px;
+            }
+            .article {
+                margin-left: 30%;
+            }
+            .title {
+                font-size: 5vw;
+            }
+            #contents {
+                width: 550px;
+                text-align: center;
+            }
+            .cards {
+                display: inline-block;
+            }
+
+            footer {
+                display: none;
+            }
+
+            .m_footer { /* 모바일일때 푸터  간격을 마추기위해 모바일 푸터사용*/
+                display: block;
+                text-align: center;
+                background: black;
+                color: white;
+                font-weight: 700;
+                height: 100px;
+                margin-top:4%;
+            }
+
+            
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="header">
+            <br>
+            <span>Home</span> <span>interests</span> <span>Expertise</span>
+        </div>
+        <div id="contents">
+            <br>
+            <h1 class="title">Showcase: Front-end(AJAX) App</h1>
+            <div class="cards"> <!-- body 내용 -->
+                
+                    <!-- <header>
+                        <h2>A short heading</h2>
+                    </header>    
+                    <img src="balloons.jpg" alt="Hot air balloons">
+                    <div class="content">
+                        <p> The idea of reaching the North Pole by means of balloons appears to have been entertained many years ago. </p>
+                    </div> -->
+            </div>
+            <br>
+            <div id="paging">
+            </div>
+            <div class="m_footer">
+                <br><br>
+                Seneca College, Copyright @ 2022
+            </div>
+        </div>
+        <footer>
+            <br><br>
+            Seneca College, Copyright @ 2022
+        </footer>
+    </div>
+<script>
+
+    $(document).ready(function() {
+        init(); //로드 될때 실행
+    })
+    
+    function init(page) { //함수 선언
+        page = page || 1;  //페이지 번호가 없다면 1  있으면 페이지번호  적용
+        $(".cards").html(""); //초기화
+        $("#paging").html(""); //초기화
+        $.ajax({ //에이젝스 호출
+            type: "GET", //겟방식 호출
+            url: "https://reqres.in/api/users?page="+page, //Ajax통신시 페이지 호출
+            dataType: "json", //제이슨타입
+            async : true,  //비동기방식
+            success: function (data) { //데이터 성공시
+                console.log("가져온 데이터",data) //가져온 데이터
+                var datas = data.data;
+                for(var i=0;i<datas.length;i++) { 
+
+                    var str = "<article class='card'>"
+                                + "<header>"
+                                +   "<h2>"+ datas[i].first_name + datas[i].last_name + "</h2>"
+                                + "</header>"
+                                +  "<img src='" + datas[i].avatar +"' alt='이미지가 없습니다'>"
+                                +  "<div class='content'> <p> " + datas[i].email + " </p> </div>"
+                            +  "</article>";
+                    $(".cards").append(str);
+                }
+                var pageStr = "<span onclick='pageClick(1)'>First</span>"
+                for(var j=1;j<=4;j++) {
+                    if(j < 3) { //데이터가 2까지 있는 관계로 1,2 번만 클릭
+                        pageStr += "<span onclick='pageClick("+ j +")'>"+j+"</span>";
+                    } else {
+                        pageStr += "<span>"+j+"</span>";
+                    }
+                } 
+                    pageStr += "<span>Last</page>"
+                $("#paging").html(pageStr);
+            }, error: function(xhr, status, err) {
+                console.log('entered error...');
+                console.log("xhr : " + JSON.stringify(xhr));
+                console.log("status : " + JSON.stringify(status));
+                console.log("err : " + err);   
+            }
+        })
+    }
+
+    function pageClick(pages){ //페이지 이동
+
+        init(pages)
+    }
+</script>
+</body>
+</html>
