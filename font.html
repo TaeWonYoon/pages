@@ -86,9 +86,7 @@
             margin: 2%;
         }
         @media screen and (max-width: 1100px) { /* 크기에 따라 최대 값 1000px  화면이 1000px 미만일대 사용 */
-            body {
-                overflow-x: hidden;
-            }
+
             #header {
                 width: 550px;
                 margin: 0 auto;
@@ -111,7 +109,7 @@
             }
             .article {
                 width: 550px;
-                display: block;
+                display: inline-block;
                 font-size: 2vw;
                 background: white;
                 text-align: center;
@@ -119,7 +117,7 @@
 
             .article2 {
                 width: 550px;
-                display: block;
+                display: inline-block;
                 background-color: white;
             }
             
@@ -138,7 +136,7 @@
     <div class="container">
         <div id="header">
             <br>
-            <span>Home</span> <span>교육비디오</span> <span>소개</span>
+            <span onclick="location.href='/'">Home</span> <span onclick="location.href='/video.html'">교육비디오</span> <span onclick="location.href='/font.html'">소개</span>
         </div>
         <div id="contents">
             <br>
